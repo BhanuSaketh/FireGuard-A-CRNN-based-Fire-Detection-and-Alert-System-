@@ -36,9 +36,7 @@ pip install tensorflow numpy pandas keras pillow matplotlib opencv-python flask
 - **CRNN.py** - Implements the **CRNN model** with enhancements  
 - **static/** - Contains static files (CSS, JavaScript, Images) for the Flask web application  
 - **templates/** - Contains HTML templates for the Flask web application  
-- **app.py** - The Flask web application for testing the models  
-- **model/** - Directory where trained models (`model.h5` and `model.json`) are saved  
-
+- **app.py** - The Flask web application for testing the models   
 ---
 
 ### 🚀 Usage  
