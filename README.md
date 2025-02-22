@@ -5,7 +5,7 @@ FireGuard is a deep learning-based fire detection system that improves upon the 
 ---
 
 ### 📌 Features  
-✅ Fire and smoke detection using deep learning  
+✅ Fire and smoke , Green-Area and Burned-Area detection using deep learning  
 ✅ Comparison between CNN and CRNN models  
 ✅ Trained on a large dataset of **49.5K images**  
 ✅ Real-time alert system integration (optional)  
