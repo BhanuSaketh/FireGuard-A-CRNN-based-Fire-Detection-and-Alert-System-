@@ -28,7 +28,7 @@ The dataset used for training and evaluation can be accessed from:
 Ensure you have the following packages installed:  
 
 ```bash
-pip install tensorflow numpy pandas keras pillow matplotlib opencv-python
+pip install tensorflow numpy pandas keras pillow matplotlib opencv-python flask
 ```
 
 ---
