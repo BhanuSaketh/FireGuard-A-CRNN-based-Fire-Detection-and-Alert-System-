@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireGuard - Video Streaming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image:url("static/back1.jpg");
+           background-repeat:no-repeat;
+           background-position:down;
+           background-size:cover;
+        }
+
+
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 36px;
+            color:crimson;
+            text-shadow:5px 1px black;
+            margin-left:20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"],
+        input[type="button"],
+        .testing-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745; /* Green color */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px; /* Added margin bottom for spacing */
+        }
+
+        input[type="submit"]:hover,
+        input[type="button"]:hover,
+        .testing-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .btn-container {
+            text-align: right; /* Center align buttons */
+            margin-top: 20px;
+
+            }
+        .btn-container2 {
+            text-align: center; /* Center align buttons */
+            margin-top: 20px;
+
+
+            }
+        .btn-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .btn-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Alert box for fire detection */
+        .alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: red;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 24px;
+            display: none;
+            z-index: 9999; /* Ensure the alert is on top of other elements */
+        }
+        .testing-btn{
+       button-align:center;
+
+        }
+    </style>
+</head>
+<body>
+
+        <h1>FireGuard - Video Streaming</h1>
+        <div class="btn-container">
+            <button>Home</button>
+            <button>About</button>
+            <button>Services</button>
+        </div>
+        <form id="videoForm" action="{{ url_for('process') }}" method="post">
+            <div class="btn-container2">
+                <select name="video_choice">
+                    <option value="1">Fire</option>
+                    <option value="2">Green</option>
+                    <option value="3">Fog</option>
+                    <option value="4">Webcam</option>
+                </select>
+                <button class="testing-btn" type="submit">Start</button>
+                <button class="testing-btn" onclick="stopVideo()">Stop</button>
+            </div>
+        </form>
+        <br>
+        <img id="videoFeed" src="" alt="Video Feed">
+
+        <!-- Alert box for fire detection -->
+        <div id="fireAlert" class="alert">Fire Detected!</div>
+
+    <script>
+        function startVideo(videoChoice) {
+            var img = document.getElementById("videoFeed");
+            img.src = "/video_feed?video_choice=" + videoChoice;
+
+            // Start checking for fire-smoke detection
+            checkFireSmoke();
+        }
+
+    function checkFireSmoke() {
+    // Fetch the video feed
+    fetch("/video_feed?video_choice=" + document.getElementById("video_choice").value)
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() === "fire-smoke") {
+                fireDetected();
+            }
+            // Continue checking for fire-smoke detection recursively
+            checkFireSmoke();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Function to show alert and play sound for fire detection
+function fireDetected() {
+    console.log("Fire detected!");
+    var alertBox = document.getElementById("fireAlert");
+    alertBox.style.display = "block";
+
+}
+
+
+        // Function to show alert and play sound for fire detection
+        function fireDetected() {
+            console.log("Fire detected!");
+            var alertBox = document.getElementById("fireAlert");
+            alertBox.style.display = "block";
+
+        
+        }
+    </script>
+
+</body>
+</html>
